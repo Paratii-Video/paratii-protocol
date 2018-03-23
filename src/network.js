@@ -121,8 +121,8 @@ class Network {
   sendMessage (peer, msg, callback) {
     if (!this._running) { return callback(new Error(`network isn't running`)) }
 
-    const stringId = peer.toB58String() ? peer.toB58String() : peer.id.toB58String()
-    this._log('sendMessage to %s', stringId, msg)
+    // const stringId = peer.toB58String() ? peer.toB58String() : peer.id.toB58String()
+    // this._log('sendMessage to %s', stringId, msg)
 
     this._dialPeer(peer, (err, conn, protocol) => {
       if (err) {
