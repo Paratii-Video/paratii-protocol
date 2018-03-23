@@ -156,10 +156,10 @@ class Network {
   // Dial to the peer and try to use the most recent Paratii
   _dialPeer (peer, callback) {
     // Attempt Paratii 0.0.1
-    this.libp2p.dial(peer, PARATII001, (err, conn) => {
+    this.libp2p.dialProtocol(peer, PARATII001, (err, conn) => {
       if (err) {
         // Attempt Paratii 0.0.1
-        this.libp2p.dial(peer, PARATII001, (err, conn) => {
+        this.libp2p.dialProtocol(peer, PARATII001, (err, conn) => {
           if (err) { return callback(err) }
 
           callback(null, conn, PARATII001)
