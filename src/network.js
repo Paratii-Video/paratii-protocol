@@ -121,8 +121,8 @@ class Network {
   sendMessage (peer, msg, callback) {
     if (!this._running) { return callback(new Error(`network isn't running`)) }
 
-    const stringId = peer.toB58String() ? peer.toB58String() : peer.id.toB58String()
-    this._log('sendMessage to %s', stringId, msg)
+    // const stringId = peer.toB58String() ? peer.toB58String() : peer.id.toB58String()
+    // this._log('sendMessage to %s', stringId, msg)
 
     this._dialPeer(peer, (err, conn, protocol) => {
       if (err) {
@@ -156,10 +156,10 @@ class Network {
   // Dial to the peer and try to use the most recent Paratii
   _dialPeer (peer, callback) {
     // Attempt Paratii 0.0.1
-    this.libp2p.dial(peer, PARATII001, (err, conn) => {
+    this.libp2p.dialProtocol(peer, PARATII001, (err, conn) => {
       if (err) {
         // Attempt Paratii 0.0.1
-        this.libp2p.dial(peer, PARATII001, (err, conn) => {
+        this.libp2p.dialProtocol(peer, PARATII001, (err, conn) => {
           if (err) { return callback(err) }
 
           callback(null, conn, PARATII001)
